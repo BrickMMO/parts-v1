@@ -32,12 +32,14 @@ $theme = mysqli_fetch_assoc($result);
 </head>
 <body>
 
-    <h1><?=$theme['name']?></h1>
+    <h1>Themme: <?=$theme['name']?></h1>
 
     <?php
 
-    $query = 'SELECT * 
+    $query = 'SELECT sets.*,inventories.id,inventories.version
         FROM sets
+        LEFT JOIN inventories
+        ON inventories.set_num = sets.set_num
         WHERE theme_id = '.$theme['id'].'
         ORDER BY name';
     $result = mysqli_query($connect, $query);
@@ -48,20 +50,19 @@ $theme = mysqli_fetch_assoc($result);
 
     <?php while($set = mysqli_fetch_assoc($result)): ?>
 
-        <?=$set['name']?>
-
-        <br>
-
-        <a href="/set.php?id=<?=$set['set_num']?>">Set Details</a>
-
-        <br>
-
-        <pre><?php print_r($set); ?></pre>
-
         <hr>
 
-    <?php endwhile; ?>
+        <h3>Set: <?=$set['name']?></h3>
 
+
+        <a href="/set.php?id=<?=$set['id']?>">Set Details</a>
+
+        <br><br>
+
+        Full Set Data:
+        <pre><?php print_r($set); ?></pre>
+
+    <?php endwhile; ?>
 
 </body>
 </html>

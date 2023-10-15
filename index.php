@@ -20,7 +20,9 @@ include('includes/functions.php');
 </head>
 <body>
 
-    <h1>Themes</h1>
+    <h1>BrickMMO Parts</h1>
+
+    <h2>Themes</h2>
 
     <?php
 
@@ -33,20 +35,40 @@ include('includes/functions.php');
 
     <?php while($theme = mysqli_fetch_assoc($result)): ?>
 
-        <?=$theme['name']?>
+        <hr>
+        
+        <?php
 
+        $query = 'SELECT * 
+            FROM sets
+            WHERE theme_id = '.$theme['id'].'
+            ORDER BY name
+            LIMIT 1';
+        $result2 = mysqli_query($connect, $query);
+
+        $set = mysqli_fetch_assoc($result2)
+
+        ?>
+
+        <h3>Theme: <?=$theme['name']?></h3>
+
+        Set: <?=$set['name']?>
         <br>
+        Number: <?=$set['set_num']?>
+
+        <br><br>
 
         <a href="/theme.php?id=<?=$theme['id']?>">Theme Details</a>
 
-        <br>
+        <br><br>
 
+        Full Theme Data:
         <pre><?php print_r($theme); ?></pre>
 
-        <hr>
+        Full Set Data:
+        <pre><?php print_r($set); ?></pre>
 
     <?php endwhile; ?>
-
 
 </body>
 </html>
