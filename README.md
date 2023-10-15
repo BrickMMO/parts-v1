@@ -1,6 +1,6 @@
 # Parts V1
 
-This application will provide a directory of LEGO® colours, parts, and sets. Quite similar to [Brick Owl](https://www.brickowl.com/) and [Rebrickable](https://rebrickable.com/). The app will collect the original data from the [Rebrickable API](https://rebrickable.com/api/). 
+This application will provide a directory of LEGO® colours, parts, and sets. Quite similar to [Brick Owl](https://www.brickowl.com/) and [Rebrickable](https://rebrickable.com/). The app will collect the original data from the [Rebrickable API](https://rebrickable.com/api/).
 
 > The live website is available at:  
 > https://parts.brickmmo.com
