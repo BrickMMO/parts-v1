@@ -8,11 +8,14 @@ include('includes/functions.php');
 
 <?php
 
+/*
+Fetch the selected set
+*/
 $query = 'SELECT sets.*,inventories.id,inventories.version
     FROM sets
     LEFT JOIN inventories
     ON inventories.set_num = sets.set_num
-    WHERE inventories.id = '.$_GET['id'].'
+    WHERE inventories.id = "'.$_GET['id'].'"
     LIMIT 1';
 $result = mysqli_query($connect, $query);
 
@@ -34,10 +37,16 @@ $set = mysqli_fetch_assoc($result);
 </head>
 <body>
 
+    <a href="/">Home</a>
+
     <h1>Set: <?=$set['name']?></h1>
 
     <?php
 
+    /*
+    Select all the parts that are connected to the
+    selected set
+    */
     $query = 'SELECT inventory_parts.*,
         parts.name AS part_name,
         part_categories.name AS category_name
@@ -60,6 +69,9 @@ $set = mysqli_fetch_assoc($result);
 
         <?php
 
+        /*
+        Fetch the colour used in this set
+        */
         $query = 'SELECT *
             FROM colors
             WHERE id = '.$part['color_id'].'
@@ -87,6 +99,18 @@ $set = mysqli_fetch_assoc($result);
         <pre><?php print_r($color); ?></pre>
 
     <?php endwhile; ?>
+
+    <h2>Minifigs</h2>
+
+    <?php
+
+    /*
+    Here you can add code to fetch all the minifigs that 
+    belong to the selected set, list them, and link to 
+    a minifig.php page
+    */
+
+    ?>
 
 </body>
 </html>
