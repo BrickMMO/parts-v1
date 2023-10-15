@@ -20,12 +20,17 @@ include('includes/functions.php');
 </head>
 <body>
 
+    <a href="/">Home</a>
+
     <h1>BrickMMO Parts</h1>
 
     <h2>Themes</h2>
 
     <?php
 
+    /*
+    Run a query to fecth all the themes
+    */
     $query = 'SELECT * 
         FROM themes
         ORDER BY name';
@@ -39,6 +44,9 @@ include('includes/functions.php');
         
         <?php
 
+        /*
+        Select one set from the current theme
+        */
         $query = 'SELECT * 
             FROM sets
             WHERE theme_id = '.$theme['id'].'

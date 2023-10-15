@@ -8,6 +8,9 @@ include('includes/functions.php');
 
 <?php
 
+/*
+Fetch all the data for the selected theme
+*/
 $query = 'SELECT * 
     FROM themes
     WHERE id = '.$_GET['id'].'
@@ -32,10 +35,15 @@ $theme = mysqli_fetch_assoc($result);
 </head>
 <body>
 
+    <a href="/">Home</a>
+
     <h1>Themme: <?=$theme['name']?></h1>
 
     <?php
 
+    /*
+    Fetch all sets linked to the selected theme
+    */
     $query = 'SELECT sets.*,inventories.id,inventories.version
         FROM sets
         LEFT JOIN inventories
