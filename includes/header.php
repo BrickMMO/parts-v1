@@ -14,7 +14,6 @@
 </head>
 
 <body>
-
     <!-- <a href="index.php">Home</a> -->
     <!-- ### Code Add By Khushi ### -->
     <nav class="navbar parts-navbar">
