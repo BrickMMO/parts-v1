@@ -4,6 +4,8 @@ include('includes/connect.php');
 include('includes/config.php');
 include('includes/functions.php');
 
+define('PAGE_TITLE', 'Set');
+include('includes/header.php');
 ?>
 
 <?php
@@ -22,22 +24,6 @@ $result = mysqli_query($connect, $query);
 $set = mysqli_fetch_assoc($result);
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Theme | BrickMMO Parts</title>
-
-    <link href="styles.css" type="text/css" rel="stylesheet">
-
-</head>
-<body>
-
-    <a href="/">Home</a>
 
     <h1>Set: <?=$set['name']?></h1>
 
@@ -88,7 +74,7 @@ $set = mysqli_fetch_assoc($result);
 
         <br><br>
 
-        <a href="/part.php?id=<?=$part['part_num']?>">Part Details</a>
+        <a href="part.php?id=<?=$part['part_num']?>">Part Details</a>
 
         <br><br>
 
@@ -112,5 +98,5 @@ $set = mysqli_fetch_assoc($result);
 
     ?>
 
-</body>
-</html>
+<?php include('includes/footer.php');?>
+
