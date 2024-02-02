@@ -1,0 +1,13 @@
+.parts-navbar {
+    background-color: #005F60;
+}
+
+.parts-btn {
+    background-color: #249EA0 !important;
+    color: white !important;
+}
+
+.parts-btn:hover {
+    background-color: #094142 !important;
+    color: rgb(202, 190, 104) !important;
+}
