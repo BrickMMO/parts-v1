@@ -6,9 +6,9 @@ include('includes/functions.php');
 define('PAGE_TITLE', 'Home');
 include('includes/header.php');
 ?>
-
-<h2>Themes</h2>
-
+<div class="container">
+    <h2>Themes</h2>
+</div>
 <?php
 // Number of results per page
 $resultsPerPage = 40;
@@ -36,12 +36,12 @@ $result = mysqli_query($connect, $query);
         ?>
                 <div class="col-3 mb-4">
                     <a class="text-decoration-none mb-4" href="theme.php?id=<?= $theme['id'] ?>">
-                        <div class="card justify-content-center" style="width:300px; height:370px; overflow: hidden;">
+                        <div class="card justify-content-center parts-card">
                             <div class="parts-card-img-container p-2">
                                 <img class="rounded mx-auto d-block" src=<?= $set['img_url']; ?> alt="<?= $set['name']; ?>">
                             </div>
-                            <div class="card-body" style="height: 50%; overflow-y:auto">
-                                <h3 class="card-title" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><?= $theme['name']; ?></h3>
+                            <div class="card-body parts-card-body">
+                                <h3 class="card-title parts-card-title"><?= $theme['name']; ?></h3>
                                 <h6 class="card-subtitle text-muted">Set: <?= $set['name']; ?></h6>
                                 <p class="card-text">Number: <?= $set['set_num']; ?></p>
                                 </br>
