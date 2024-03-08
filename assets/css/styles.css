@@ -18,6 +18,11 @@
     color: rgb(202, 190, 104) !important;
 }
 
+.parts_home {
+    padding: 70px;
+    height: 700px;
+}
+
 .parts-card {
     width: 300px;
     height: 370px;
@@ -50,6 +55,8 @@
 
 .parts-home-page-text {
     color: #249EA0;
+    font-weight: bolder;
+    font-size: 70px;
 }
 
 .parts-footer {
