@@ -6,21 +6,23 @@ include('includes/functions.php');
 define('PAGE_TITLE', 'Home');
 include('includes/header.php');
 ?>
-<div class="container">
-    <div class="row">
-        <div class="col d-flex align-items-center justify-content-center">
-            <div class="d-flex flex-column">
-                <h1 class="parts-home-page-text">
-                    HELLO!!
-                </h1>
-                <h4>
-                    Explore all the cool projects we've been building
-                    for our LEGO city.
-                </h4>
+<div class="parts_home">
+    <div class=" container">
+        <div class="row">
+            <div class="col d-flex align-items-center justify-content-center">
+                <div class="d-flex flex-column">
+                    <h1 class="parts-home-page-text">
+                        HELLO!!
+                    </h1>
+                    <h4>
+                        Explore all the cool projects we've been building
+                        for our LEGO city.
+                    </h4>
+                </div>
             </div>
-        </div>
-        <div class=" col">
-            <img src="./assets/img/theme-home.png">
+            <div class=" col">
+                <img src="./assets/img/theme-home.png">
+            </div>
         </div>
     </div>
 </div>
