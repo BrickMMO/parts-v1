@@ -6,9 +6,7 @@ include('includes/functions.php');
 
 define('PAGE_TITLE', 'Set');
 include('includes/header.php');
-?>
 
-<?php
 
 /*
 Fetch the selected set
@@ -46,9 +44,9 @@ $set = mysqli_fetch_assoc($result);
     $result = mysqli_query($connect, $query);
 
     ?>
-
+<div class="container">
     <h2>Parts</h2>
-
+    <div class="row">
     <?php while($part = mysqli_fetch_assoc($result)): ?>
 
         <hr>
@@ -69,21 +67,22 @@ $set = mysqli_fetch_assoc($result);
         ?>
 
         <h3>Part: <?=$part['part_name']?></h3>
-
-        Color: <?=$color['name']?>
-
-        <br><br>
-
+        
+        <div class="col">
+        <img class="rounded mx-auto d-block" src=<?= $part['img_url']; ?> alt="<?= $part['img_url']; ?>">
+        </div>
+        <br>
+        <div class="col">
         <a href="part.php?id=<?=$part['part_num']?>">Part Details</a>
 
-        <br><br>
+        <br>
 
         Full Part Data:
         <pre><?php print_r($part); ?></pre>
 
         Full Color Data:
         <pre><?php print_r($color); ?></pre>
-
+        </div>
     <?php endwhile; ?>
 
     <h2>Minifigs</h2>
