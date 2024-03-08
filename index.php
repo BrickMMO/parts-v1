@@ -7,7 +7,22 @@ define('PAGE_TITLE', 'Home');
 include('includes/header.php');
 ?>
 <div class="container">
-    <h2>Themes</h2>
+    <div class="row">
+        <div class="col d-flex align-items-center justify-content-center">
+            <div class="d-flex flex-column">
+                <h1 class="parts-home-page-text">
+                    HELLO!!
+                </h1>
+                <h4>
+                    Explore all the cool projects we've been building
+                    for our LEGO city.
+                </h4>
+            </div>
+        </div>
+        <div class=" col">
+            <img src="./assets/img/theme-home.png">
+        </div>
+    </div>
 </div>
 <?php
 // Number of results per page
@@ -25,6 +40,7 @@ $result = mysqli_query($connect, $query);
 ?>
 
 <div class="container mt-4">
+    <h2 class="px-2">DISCOVER POPULAR THEMES</h2>
     <div class="row">
         <?php
         while ($theme = mysqli_fetch_assoc($result)) :
@@ -34,21 +50,21 @@ $result = mysqli_query($connect, $query);
             if (mysqli_num_rows($result2) > 0) {
                 $set = mysqli_fetch_assoc($result2);
         ?>
-                <div class="col-3 mb-4">
-                    <a class="text-decoration-none mb-4" href="theme.php?id=<?= $theme['id'] ?>">
-                        <div class="card justify-content-center parts-card">
-                            <div class="parts-card-img-container p-2">
-                                <img class="rounded mx-auto d-block" src=<?= $set['img_url']; ?> alt="<?= $set['name']; ?>">
-                            </div>
-                            <div class="card-body parts-card-body">
-                                <h3 class="card-title parts-card-title"><?= $theme['name']; ?></h3>
-                                <h6 class="card-subtitle text-muted">Set: <?= $set['name']; ?></h6>
-                                <p class="card-text">Number: <?= $set['set_num']; ?></p>
-                                </br>
-                            </div>
-                        </div>
-                    </a>
+        <div class="col-3 mb-4">
+            <a class="text-decoration-none mb-4" href="theme.php?id=<?= $theme['id'] ?>">
+                <div class="card justify-content-center parts-card">
+                    <div class="parts-card-img-container p-2">
+                        <img class="rounded mx-auto d-block" src=<?= $set['img_url']; ?> alt="<?= $set['name']; ?>">
+                    </div>
+                    <div class="card-body parts-card-body">
+                        <h3 class="card-title parts-card-title"><?= $theme['name']; ?></h3>
+                        <h6 class="card-subtitle text-muted">Set: <?= $set['name']; ?></h6>
+                        <p class="card-text">Number: <?= $set['set_num']; ?></p>
+                        </br>
+                    </div>
                 </div>
+            </a>
+        </div>
         <?php
             }
         endwhile;

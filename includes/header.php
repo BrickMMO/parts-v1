@@ -19,7 +19,7 @@
     <nav class="navbar parts-navbar">
         <div class="container">
             <a class="navbar-brand" href="index.php">
-                <img src="./assets/img/logo.png" alt="BrickMMO Parts Logo" class="img-fluid">
+                <img src="./assets/img/logo.png" alt="BrickMMO Parts Logo" class="img-fluid parts_img">
             </a>
 
             <form class="d-flex">
