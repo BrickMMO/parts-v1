@@ -42,7 +42,7 @@ $result = mysqli_query($connect, $query);
 ?>
 
 <div class="container mt-4">
-    <h2 class="px-2">DISCOVER POPULAR THEMES</h2>
+    <h2 class="px-2 parts-px">DISCOVER POPULAR THEMES</h2>
     <div class="row">
         <?php
         while ($theme = mysqli_fetch_assoc($result)) :
