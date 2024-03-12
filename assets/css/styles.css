@@ -35,6 +35,9 @@
     overflow: hidden;
 }
 
+
+
+
 .parts-card-img-container img {
     width: 100%;
     height: 100%;
@@ -66,4 +69,8 @@
 
 .parts-text {
     color: #F4EDED;
+}
+
+.set-header {
+    color: #249ea0;
 }

@@ -11,19 +11,46 @@ include('includes/header.php');
 /*
 Fetch the selected set
 */
-$query = 'SELECT sets.*,inventories.id,inventories.version
+$query = 'SELECT sets.*,inventories.id,inventories.version, themes.name
     FROM sets
     LEFT JOIN inventories
     ON inventories.set_num = sets.set_num
+    LEFT JOIN themes
+    ON themes.id = sets.theme_id
     WHERE inventories.id = "'.$_GET['id'].'"
     LIMIT 1';
+    
 $result = mysqli_query($connect, $query);
 
 $set = mysqli_fetch_assoc($result);
-
+// echo $query;
 ?>
 
+   
+    <div class="container mt-4">
     <h1>Set: <?=$set['name']?></h1>
+    <div class="row align-items-center">
+        <div class="col-md-8">  
+            <!-- <div class="set-img-container p-2"> -->
+                <img class="rounded mx-auto d-block" height="300px" width="400px" style="object-fit: contain;" src=<?= $set['img_url']; ?> alt="<?= $set['name']; ?>">
+            <!-- </div> -->
+        </div>
+        <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header  justify-content-center" style="background-color:#FAAB36;font-size:larger;font-weight:600;">
+                        Theme Details   
+                    </div>
+                    <div class="card-body " style="background-color:#F4F0F0;">
+                        <h3 class="card-title"><?= $set['set_num']; ?></h3>
+                        <h6 class="card-subtitle mb-2">Theme <?= '<b>'.$set['name'].'</b>'; ?></h6>
+                        <h6 class="card-subtitle mb-2">Inventory <?= $set['num_parts']; ?></h6>
+                        <h6 class="card-subtitle mb-2">Year <?= $set['year']; ?></h6>
+                        
+                    </div>
+                </div>
+        </div>
+            
+    </div>
 
     <?php
 
@@ -68,6 +95,7 @@ $set = mysqli_fetch_assoc($result);
 
         <h3>Part: <?=$part['part_name']?></h3>
         
+
         <div class="col">
         <img class="rounded mx-auto d-block" src=<?= $part['img_url']; ?> alt="<?= $part['img_url']; ?>">
         </div>

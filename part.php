@@ -3,7 +3,6 @@
 include('includes/connect.php');
 include('includes/config.php');
 include('includes/functions.php');
-
 define('PAGE_TITLE', 'Parts');
 include('includes/header.php');
 ?>
