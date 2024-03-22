@@ -52,21 +52,21 @@ $result = mysqli_query($connect, $query);
             if (mysqli_num_rows($result2) > 0) {
                 $set = mysqli_fetch_assoc($result2);
         ?>
-        <div class="col-3 mb-4">
-            <a class="text-decoration-none mb-4" href="theme.php?id=<?= $theme['id'] ?>">
-                <div class="card justify-content-center parts-card">
-                    <div class="parts-card-img-container p-2">
-                        <img class="rounded mx-auto d-block" src=<?= $set['img_url']; ?> alt="<?= $set['name']; ?>">
-                    </div>
-                    <div class="card-body parts-card-body">
-                        <h3 class="card-title parts-card-title"><?= $theme['name']; ?></h3>
-                        <h6 class="card-subtitle text-muted">Set: <?= $set['name']; ?></h6>
-                        <p class="card-text">Number: <?= $set['set_num']; ?></p>
-                        </br>
-                    </div>
+                <div class="col-3 mb-4">
+                    <a class="text-decoration-none mb-4" href="theme.php?id=<?= $theme['id'] ?>">
+                        <div class="card justify-content-center parts-card">
+                            <div class="parts-card-img-container p-2">
+                                <img class="rounded mx-auto d-block" src=<?= $set['img_url']; ?> alt="<?= $set['name']; ?>">
+                            </div>
+                            <div class="card-body parts-card-body">
+                                <h3 class="card-title parts-card-title"><?= $theme['name']; ?></h3>
+                                <h6 class="card-subtitle text-muted">Set: <?= $set['name']; ?></h6>
+                                <p class="card-text">Number: <?= $set['set_num']; ?></p>
+                                </br>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-        </div>
         <?php
             }
         endwhile;
