@@ -3,6 +3,7 @@
 include('includes/connect.php');
 include('includes/config.php');
 include('includes/functions.php');
+
 define('PAGE_TITLE', 'Parts');
 include('includes/header.php');
 ?>
@@ -23,6 +24,7 @@ $part = mysqli_fetch_assoc($result);
 ?>
 
 
+
 <h1>Part: <?= $part['name'] ?></h1>
 
 <?php
@@ -32,7 +34,7 @@ $part = mysqli_fetch_assoc($result);
     */
 $query = 'SELECT colors.*
         FROM colors
-        LEFT JOIN elements 
+        LEFT JOIN elements
         ON color_id = id
         WHERE part_num = "' . $part['part_num'] . '"
         GROUP BY colors.id
@@ -42,54 +44,76 @@ $result = mysqli_query($connect, $query);
 ?>
 
 <h2>Colours</h2>
-
-<?php while ($color = mysqli_fetch_assoc($result)) : ?>
-
-    <hr>
-
-    <h3>Color: <?= $color['name'] ?></h3>
-
-    Full Color Data:
-    <pre><?php print_r($color); ?></pre>
-
-<?php endwhile; ?>
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Color</th>
 
 
-<hr>
-<hr>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($color = mysqli_fetch_assoc($result)) : ?>
+            <tr>
+                <td><?= $color['name'] ?></td>
+            </tr>
 
-<?php
 
-/*
-    Fetch all the sets the selected part comes with
-    */
-$query = 'SELECT sets.*
-        FROM sets
-        LEFT JOIN inventories 
-        ON inventories.set_num = sets.set_num
-        LEFT JOIN inventory_parts
-        ON inventory_parts.inventory_id = inventories.id
-        WHERE part_num = "' . $part['part_num'] . '"
-        GROUP BY sets.set_num
-        ORDER BY name';
-$result = mysqli_query($connect, $query);
+            <?php endwhile; ?>
 
-?>
+            <hr>
+            <hr>
 
-<h2>Sets</h2>
 
-<?php while ($set = mysqli_fetch_assoc($result)) : ?>
+            <?php
 
-    <hr>
+            /*
+Fetch all the sets the selected part comes with
+*/
+            $query = 'SELECT sets.*
+    FROM sets
+    LEFT JOIN inventories 
+    ON inventories.set_num = sets.set_num
+    LEFT JOIN inventory_parts
+    ON inventory_parts.inventory_id = inventories.id
+    WHERE part_num = "' . $part['part_num'] . '"
+    GROUP BY sets.set_num
+    ORDER BY name';
+            $result = mysqli_query($connect, $query);
 
-    <h3>Set: <?= $set['name'] ?></h3>
+            ?>
 
-    <a href="set.php?id=<?= $set['set_num'] ?>">Part Details</a>
+        </tbody>
+    </table>
+</div>
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <?php while ($set = mysqli_fetch_assoc($result)) : ?>
+        <div class="col-3 mb-4">
+            <div class="card">
+                <div class="parts-card-img-container p-2">
+                    <img class="rounded mx-auto d-block" src=<?= $set['img_url']; ?> alt="<?= $set['name']; ?>">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Set: <?= $set['name'] ?></h5>
+                    <p class="card-text">Part Details: <a href="set.php?id=<?= $set['set_num'] ?>">Go here</a></p>
+                    <p class="card-text">Full Set Data:</p>
+                    <ul>
+                        <li>Set Number: <?= $set['set_num'] ?></li>
+                        <li>Year: <?= $set['year'] ?></li>
+                        <li>Theme: <?= $set['theme_id'] ?></li>
+                        <li>Number of Parts: <?= $set['num_parts'] ?></li>
 
-    <br><br>
 
-    Full Set Data:
-    <pre><?php print_r($set); ?></pre>
 
-<?php endwhile; ?>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <?php endwhile; ?>
+    </div>
+</div>
+
 <?php include('includes/footer.php'); ?>
