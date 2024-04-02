@@ -49,8 +49,7 @@ Fetch the selected part
             <thead>
                 <tr>
                     <th>Color</th>
-
-
+                    <th>RBG Color Demo</th>
                 </tr>
             </thead>
             <tbody>
