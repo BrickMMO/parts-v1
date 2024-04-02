@@ -23,6 +23,15 @@ This application will intentionally be written in a simplified structure with a 
 - [BrickMMO](https://brickmmo.com)
 - [CodeAdam](https://codeadam.ca)
 
+## Pending Tasks
+
+- **MiniFigs (set.php):** Implement the MiniFigs functionality in `set.php`.
+- **Favicon Icon (header.php):** Add a favicon icon to the website by updating `header.php`.
+- **Responsive Design:** Ensure the website design is responsive across different devices.
+- **Search Functionality (header.php):** Implement search functionality in the header section of the website.
+- **Breadcrumb (part.php):** Implement breadcrumb navigation in `part.php`.
+- **Design Minifigs Page:** Design the Minifigs page to showcase the collection effectively.
+
 <a href="https://brickmmo.com">
 <img src="https://brickmmo.com/images/brickmmo-logo-horizontal.jpg" width="300">
 </a>
