@@ -45,7 +45,7 @@ $result = mysqli_query($connect, $query);
 
 <h2>Colours</h2>
 <div class="table-responsive">
-    <table class="table table-bordered">
+    <table class="table table-bordered Parts-table">
         <thead>
             <tr>
                 <th>Color</th>
@@ -55,15 +55,17 @@ $result = mysqli_query($connect, $query);
         </thead>
         <tbody>
             <?php while ($color = mysqli_fetch_assoc($result)) : ?>
-            <tr>
-                <td><?= $color['name'] ?></td>
-            </tr>
+                <tr>
+                    <td><?= $color['name'] ?></td>
+                    <td style="background-color: #<?= $color['rgb'] ?>; width: 200px;"></td>
+
+                </tr>
 
 
             <?php endwhile; ?>
 
             <hr>
-            <hr>
+
 
 
             <?php
@@ -90,28 +92,28 @@ Fetch all the sets the selected part comes with
 <div class="container">
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <?php while ($set = mysqli_fetch_assoc($result)) : ?>
-        <div class="col-3 mb-4">
-            <div class="card">
-                <div class="parts-card-img-container p-2">
-                    <img class="rounded mx-auto d-block" src=<?= $set['img_url']; ?> alt="<?= $set['name']; ?>">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Set: <?= $set['name'] ?></h5>
-                    <p class="card-text">Part Details: <a href="set.php?id=<?= $set['set_num'] ?>">Go here</a></p>
-                    <p class="card-text">Full Set Data:</p>
-                    <ul>
-                        <li>Set Number: <?= $set['set_num'] ?></li>
-                        <li>Year: <?= $set['year'] ?></li>
-                        <li>Theme: <?= $set['theme_id'] ?></li>
-                        <li>Number of Parts: <?= $set['num_parts'] ?></li>
+            <div class="col-3 mb-4">
+                <div class="card">
+                    <div class="parts-card-img-container p-2">
+                        <img class="rounded mx-auto d-block" src=<?= $set['img_url']; ?> alt="<?= $set['name']; ?>">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Set: <?= $set['name'] ?></h5>
+                        <p class="card-text">Part Details: <a href="set.php?id=<?= $set['set_num'] ?>">Go here</a></p>
+                        <p class="card-text">Full Set Data:</p>
+                        <ul>
+                            <li>Set Number: <?= $set['set_num'] ?></li>
+                            <li>Year: <?= $set['year'] ?></li>
+                            <li>Theme: <?= $set['theme_id'] ?></li>
+                            <li>Number of Parts: <?= $set['num_parts'] ?></li>
 
 
 
 
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
         <?php endwhile; ?>
     </div>
 </div>
