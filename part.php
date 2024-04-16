@@ -4,40 +4,28 @@ include('includes/connect.php');
 include('includes/config.php');
 include('includes/functions.php');
 
+define('PAGE_TITLE', 'Parts');
+include('includes/header.php');
 ?>
+<div class="container">
+    <?php
 
-<?php
-
-/*
+    /*
 Fetch the selected part
 */
-$query = 'SELECT parts.*
+    $query = 'SELECT parts.*
     FROM parts
-    WHERE part_num = "'.$_GET['id'].'"
+    WHERE part_num = "' . $_GET['id'] . '"
     LIMIT 1';
-$result = mysqli_query($connect, $query);
+    $result = mysqli_query($connect, $query);
 
-$part = mysqli_fetch_assoc($result);
+    $part = mysqli_fetch_assoc($result);
 
-?>
+    ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Theme | BrickMMO Parts</title>
-
-    <link href="styles.css" type="text/css" rel="stylesheet">
-
-</head>
-<body>
-
-    <a href="/">Home</a>
-
-    <h1>Part: <?=$part['name']?></h1>
+    <h1>Part: <?= $part['name'] ?></h1>
 
     <?php
 
@@ -46,9 +34,9 @@ $part = mysqli_fetch_assoc($result);
     */
     $query = 'SELECT colors.*
         FROM colors
-        LEFT JOIN elements 
+        LEFT JOIN elements
         ON color_id = id
-        WHERE part_num = "'.$part['part_num'].'"
+        WHERE part_num = "' . $part['part_num'] . '"
         GROUP BY colors.id
         ORDER BY name';
     $result = mysqli_query($connect, $query);
@@ -56,55 +44,79 @@ $part = mysqli_fetch_assoc($result);
     ?>
 
     <h2>Colours</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered parts-table">
+            <thead>
+                <tr>
+                    <th>Color</th>
+                    <th>RBG Color Demo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($color = mysqli_fetch_assoc($result)) : ?>
+                    <tr>
+                        <td><?= $color['name'] ?></td>
+                        <td style="background-color: #<?= $color['rgb'] ?>; width: 200px;"></td>
 
-    <?php while($color = mysqli_fetch_assoc($result)): ?>
-
-        <hr>
-
-        <h3>Color: <?=$color['name']?></h3>
-
-        Full Color Data:
-        <pre><?php print_r($color); ?></pre>
-
-    <?php endwhile; ?>
+                    </tr>
 
 
-    <hr><hr>
+                <?php endwhile; ?>
 
-    <?php
+                <hr>
 
-    /*
-    Fetch all the sets the selected part comes with
-    */
-    $query = 'SELECT sets.*
-        FROM sets
-        LEFT JOIN inventories 
-        ON inventories.set_num = sets.set_num
-        LEFT JOIN inventory_parts
-        ON inventory_parts.inventory_id = inventories.id
-        WHERE part_num = "'.$part['part_num'].'"
-        GROUP BY sets.set_num
-        ORDER BY name';
-    $result = mysqli_query($connect, $query);
 
-    ?>
 
-    <h2>Sets</h2>
+                <?php
 
-    <?php while($set = mysqli_fetch_assoc($result)): ?>
+                /*
+Fetch all the sets the selected part comes with
+*/
+                $query = 'SELECT sets.*
+    FROM sets
+    LEFT JOIN inventories 
+    ON inventories.set_num = sets.set_num
+    LEFT JOIN inventory_parts
+    ON inventory_parts.inventory_id = inventories.id
+    WHERE part_num = "' . $part['part_num'] . '"
+    GROUP BY sets.set_num
+    ORDER BY name';
+                $result = mysqli_query($connect, $query);
 
-        <hr>
+                ?>
 
-        <h3>Set: <?=$set['name']?></h3>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-        <a href="/set.php?id=<?=$set['set_num']?>">Part Details</a>
+<div class="container">
+    <hr>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <?php while ($set = mysqli_fetch_assoc($result)) : ?>
+            <div class="col-3 mb-4">
+                <div class="card">
+                    <div class="parts-card-img-container p-2">
+                        <img class="rounded mx-auto d-block" src=<?= $set['img_url']; ?> alt="<?= $set['name']; ?>">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title parts-card-title">Set: <?= $set['name'] ?></h5>
+                        <a href="part.php?id=<?= $part['part_num'] ?>">Part Details</a>
 
-        <br><br>
+                        <p class="card-text">Full Set Data:</p>
+                        <ul>
+                            <li>Set Number: <?= $set['set_num'] ?></li>
+                            <li>Year: <?= $set['year'] ?></li>
+                            <li>Theme: <?= $set['theme_id'] ?></li>
+                            <li>Number of Parts: <?= $set['num_parts'] ?></li>
 
-        Full Set Data:
-        <pre><?php print_r($set); ?></pre>
 
-    <?php endwhile; ?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        <?php endwhile; ?>
+    </div>
+</div>
 
-</body>
-</html>
+<?php include('includes/footer.php'); ?>
