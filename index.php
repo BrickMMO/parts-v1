@@ -1,10 +1,12 @@
 <?php
+
 include('includes/connect.php');
 include('includes/config.php');
 include('includes/functions.php');
 
 define('PAGE_TITLE', 'Home');
 include('includes/header.php');
+
 ?>
 <div class="parts_home">
     <div class=" container">
