@@ -34,7 +34,7 @@ echo '<h2>Rows in File: ' . $lastLine . '</h2>';
 if(isset($_GET['start'])) $start = $_GET['start'];
 else $start = 0;
 
-$records = 2500;
+$records = 5000;
 
 echo '<h2>Processing Records from ' . $start . ' to ' . ($start + $records) . '</h2>';
 
