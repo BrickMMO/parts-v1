@@ -29,9 +29,24 @@ $file = new SplFileObject($tmpCsvFile, 'r');
 $file->seek(PHP_INT_MAX);
 $lastLine = $file->key();
 
-echo 'Rows in File: ' . $lastLine . '<hr>';
+echo '<h2>Rows in File: ' . $lastLine . '</h2>';
 
-for ($i = $lastLine; $i >= 0; $i--) 
+if(isset($_GET['start'])) $start = $_GET['start'];
+else $start = 0;
+
+$records = 2500;
+
+echo '<h2>Processing Records from ' . $start . ' to ' . ($start + $records) . '</h2>';
+
+$query = 'INSERT INTO inventory_parts (
+                    inventory_id,
+                    part_num,
+                    color_id,
+                    quantity,
+                    is_spare,
+                    img_url
+                ) VALUES ';
+for ($i = $start; $i <= $start + $records; $i++) 
 {
 
     $file->seek($i);
@@ -42,46 +57,58 @@ for ($i = $lastLine; $i >= 0; $i--)
     $record = str_getcsv($line);
     $record = array_map('trim', $record);
 
-    if (count($record) === 6) 
+    if($i >= $start && $i < $start + $records)
     {
 
-        $query = 'INSERT IGNORE INTO inventory_parts (
-                inventory_id,
-                part_num,
-                color_id,
-                quantity,
-                is_spare,
-                img_url
-            ) VALUES (
-                "' . addslashes($record[0]) . '",
-                "' . addslashes($record[1]) . '",
-                "' . addslashes($record[2]) . '",
-                "' . addslashes($record[3]) . '",
-                "' . addslashes($record[4]) . '",
-                "' . addslashes($record[5]) . '"
-            )';
-
-        mysqli_query($connect, $query);
-
-        echo 'Inserting Record<br>';
-        // echo $query . '<br>';
-        // echo 'Added Rows: ' . mysqli_affected_rows($connect) . '<br>';
-
-    }
-    else 
-    {
-
-        echo 'Invalid Record<br>';
         echo '<pre>';
         print_r($record);
         echo '</pre>';
-        
+
+        if (count($record) === 6 && is_numeric($record[0]))
+        {
+            $query .= '(
+                    "' . addslashes($record[0]) . '",
+                    "' . addslashes($record[1]) . '",
+                    "' . addslashes($record[2]) . '",
+                    "' . addslashes($record[3]) . '",
+                    "' . addslashes($record[4]) . '",
+                    "' . addslashes($record[5]) . '"
+                ),';
+
+            echo 'Inserting Record #' . $i . '<br>';
+
+            // echo $query . '<br>';
+            // echo 'Added Rows: ' . mysqli_affected_rows($connect) . '<br>';
+
+        }
+        else 
+        {
+
+            echo 'Invalid Record<br>';
+            echo '<pre>';
+            print_r($record);
+            echo '</pre>';
+        }
+
+    }
+    else
+    {
+
+        $query = rtrim($query, ',');
+            
+        mysqli_query($connect, $query);
+
+        unlink($tmpCsvFile);
+
+        echo '<h1>Redirecting...</h1>
+            <h2>Added ' . ($start + $records) . ' records so far.</h2>
+            <script>
+            setTimeout(function() {
+                window.location.href = "inventory_parts.php?start=' . ($start + $records) . '";
+            }, 1000);
+            </script>';
+        exit;
     }
 
     echo '<hr>';
-
 }
-
-unlink($tmpCsvFile); // clean up CSV
-
-echo 'IMPORT COMPLETE';
